@@ -10,11 +10,14 @@ public enum Star
     Water
 }
 
-public class Card : MonoBehaviour
+[System.Serializable]
+public class Card
 {
     public Weather weather;
     public Star star;
     public string cardName;
     public string zodiac; //º°ÀÚ¸®
-    public 
+
+    
 }
+

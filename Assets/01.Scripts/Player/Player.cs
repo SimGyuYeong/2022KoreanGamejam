@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Player
 {
     public int num;
+    public Transform cardListTrm;
     public List<CardObj> cards = new List<CardObj>();
 
     public bool _isFlip = false;

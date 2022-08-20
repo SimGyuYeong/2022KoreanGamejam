@@ -31,6 +31,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Player player1 = new Player();
     public Player player2 = new Player();
 
+    public GameObject canvas;
+
     // 카메라 불러오는게 메모리를 엄청 잡아먹어서 한번만 불러옴
     private static Camera _mainCam = null;
     public static Camera MainCam
@@ -68,6 +70,11 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    public void SelectCard()
+    {
+        CardManager.Instance.AddCard(turnPlayer);
+    }
+
     public void GameSetup()
     {
         switch(turnMode)
@@ -83,6 +90,11 @@ public class GameManager : MonoSingleton<GameManager>
                 turnPlayer = player1;
                 break;
         }
+    }
+
+    public void EndTurn()
+    {
+        StartCoroutine(NextTurnCoroutine());
     }
 
     /// <summary>
@@ -125,14 +137,14 @@ public class GameManager : MonoSingleton<GameManager>
         if (turnPlayer == player1)
         {
             turnPlayer = player2;
-            CardManager.Instance.cardSpawnPosition.DOLocalRotate(new Vector3(0, 0, 360), 0);
             MainCam.transform.DOLocalRotate(new Vector3(0, 0, 180), 0.5f);
+            canvas.transform.DOLocalRotate(new Vector3(0, 0, 180), 0.5f);
         }
         else
         {
             turnPlayer = player1;
-            CardManager.Instance.cardSpawnPosition.DOLocalRotate(new Vector3(0, 0, 180), 0);
             MainCam.transform.DOLocalRotate(new Vector3(0, 0, 360), 0.5f);
+            canvas.transform.DOLocalRotate(new Vector3(0, 0, 360), 0.5f);
         }
 
         yield return new WaitForSeconds(0.6f);

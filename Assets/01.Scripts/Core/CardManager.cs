@@ -40,6 +40,7 @@ public class CardManager : MonoSingleton<CardManager>
     public void AddCard(Player player)
     {
         var cardObj = Instantiate(cardPrefab, cardSpawnPosition.position, Quaternion.identity);
+        cardObj.transform.SetParent(player.cardListTrm);
         if(player == GameManager.Instance.player2) cardObj.transform.DOLocalRotate(new Vector3(0, 0, 180), 0);
         CardObj card = cardObj.GetComponent<CardObj>();
         card.Setup(PopCard());
@@ -162,7 +163,7 @@ public class CardManager : MonoSingleton<CardManager>
 
     private void EnlargeCard(bool isEnlarge, CardObj card, bool isPlayer1)
     {
-        if(!GameManager.Instance.isLoading)
+        if(!GameManager.Instance.isLoading && card.spriteRenderer.sprite != UIManager.Instance.backCardSprite)
         {
             if (isEnlarge)
             {

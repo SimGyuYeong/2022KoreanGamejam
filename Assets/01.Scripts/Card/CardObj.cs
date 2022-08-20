@@ -10,6 +10,7 @@ public class CardObj : MonoBehaviour
     public Card card;
     public SpriteRenderer spriteRenderer;
     public PRS originPRS;
+    public bool isSelected;
 
     private void Awake()
     {
@@ -40,6 +41,11 @@ public class CardObj : MonoBehaviour
         }
     }
 
+    public void Destroy()
+    {
+
+    }
+
     private void OnMouseOver()
     {
         CardManager.Instance.CardMouseOver(this);
@@ -48,5 +54,15 @@ public class CardObj : MonoBehaviour
     private void OnMouseExit()
     {
         CardManager.Instance.CardMouseExit(this);
+    }
+
+    public void OnMouseDown()
+    {
+        CardManager.Instance.CardClick(this);
+    }
+
+    public void OnMouseUp()
+    {
+        CardManager.Instance.CardMouseUp();
     }
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
+using Random = UnityEngine.Random;
 
 [SerializeField]
 class CardList
@@ -12,6 +14,10 @@ class CardList
 public class CardManager : MonoSingleton<CardManager>
 {
     public List<Card> cardList = new List<Card>();  //전체카드
+    public List<CardObj> selectCardList = new List<CardObj>(); //선택한 카드들
+
+    public bool isCardDrag = false;
+
     public GameObject cardPrefab;
     public Transform cardSpawnPosition;
 
@@ -19,10 +25,21 @@ public class CardManager : MonoSingleton<CardManager>
     public Transform player1CardRight;
     public Transform player2CardLeft;
     public Transform player2CardRight;
+    private bool _onCardArea;
 
     private void Start()
     {
         GameManager.OnAddCard += AddCard;
+    }
+
+    private void Update()
+    {
+        if(isCardDrag)
+        {
+            CardDrag(); 
+        }
+
+        DetectCardArea();
     }
 
     private void OnDestroy()
@@ -179,7 +196,51 @@ public class CardManager : MonoSingleton<CardManager>
         }
     }
 
+    public void CardClick(CardObj card)
+    {
+        isCardDrag = true;
+        if(card.isSelected == false)
+        {
+            selectCardList.Add(card);
+        }
+        else
+        {
+            selectCardList.Remove(card);
+        }
+        card.isSelected = !card.isSelected;
+    }
+
+    public void CardMouseUp()
+    {
+        isCardDrag = false;
+        if(!_onCardArea)
+        {
+            foreach(CardObj card in selectCardList)
+            {
+                GameManager.Instance.turnPlayer.cards.Remove(card);
+                card.Destroy();
+            }
+            selectCardList.Clear();
+        }
+    }
+
+    public void CardDrag()
+    {
+        if(!_onCardArea)
+        {
+            foreach(CardObj card in selectCardList)
+            {
+                card.MoveTrm(new PRS(Utills.MousePos, Utills.QI, card.originPRS.scale), false);
+            }
+        }
+    }
+
+    private void DetectCardArea()
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(Utills.MousePos, Vector3.forward);
+        int layer = LayerMask.NameToLayer("CardArea");
+        _onCardArea = Array.Exists(hits, x => x.collider.gameObject.layer == layer);
+    }
+
     #endregion
-
-
 }

@@ -64,12 +64,17 @@ public class CardManager : MonoSingleton<CardManager>
 
     public void AddCard(Player player)
     {
-        var cardObj = Instantiate(cardPrefab, cardSpawnPosition.position, Quaternion.identity);
+        GameManager.Instance.isLoading = true;
+        var cardObj = PoolManager.Instance.Pop("Card");
+        cardObj.transform.position = cardSpawnPosition.position;
+        cardObj.transform.rotation = Quaternion.identity;
         cardObj.transform.SetParent(player.cardListTrm);
-        if(player == GameManager.Instance.player2) cardObj.transform.DOLocalRotate(new Vector3(0, 0, 180), 0);
+        if (player == GameManager.Instance.player2) cardObj.transform.DOLocalRotate(new Vector3(0, 0, 180), 0);
         CardObj card = cardObj.GetComponent<CardObj>();
         card.Setup(PopCard());
         player.cards.Add(card);
+
+        UIManager.Instance.CardCntUpdate();
 
         SetOriginOrder(player);
         CardAlignment(player);
@@ -93,6 +98,16 @@ public class CardManager : MonoSingleton<CardManager>
             targetCard.originPRS = originPRSs[i];
             targetCard.MoveTrm(targetCard.originPRS, true, .7f);
         }
+        if(GameManager.Instance.isGameStart == false)
+        {
+            StartCoroutine(NextTurnCo());
+        }
+    }
+
+    private IEnumerator NextTurnCo()
+    {
+        yield return new WaitForSeconds(0.8f);
+        StartCoroutine(GameManager.Instance.NextTurnCoroutine());
     }
 
     private List<PRS> RoundAligment(Transform leftTrm, Transform rightTrm, int count, float height, Vector3 scale)
@@ -178,12 +193,12 @@ public class CardManager : MonoSingleton<CardManager>
 
     public void CardMouseOver(CardObj card)
     {
-        EnlargeCard(true, card, GameManager.Instance.turnPlayer == GameManager.Instance.player1);
+        EnlargeCard(true, card, GameManager.Instance.TurnPlayer == GameManager.Instance.player1);
     }
 
     public void CardMouseExit(CardObj card)
     {
-        EnlargeCard(false, card, GameManager.Instance.turnPlayer == GameManager.Instance.player1);
+        EnlargeCard(false, card, GameManager.Instance.TurnPlayer == GameManager.Instance.player1);
     }
 
     private void EnlargeCard(bool isEnlarge, CardObj card, bool isPlayer1)
@@ -239,10 +254,12 @@ public class CardManager : MonoSingleton<CardManager>
                 
                 foreach(CardObj card in selectCardList)
                 {
+                    if (zodiac == card.card.zodiac) zodiacCnt++;
+                    if (weather == card.card.weather.weatherId) weatherCnt++;
                     if (star == card.card.star) starCnt++;
-                    else if (weather == card.card.weather.weatherId) weatherCnt++;
-                    else if (zodiac == card.card.zodiac) zodiacCnt++;
                 }
+
+                Debug.Log(weatherCnt);
 
                 if (nothingCnt == 0)
                 {
@@ -257,14 +274,17 @@ public class CardManager : MonoSingleton<CardManager>
 
     public void CardThrowSuccess(int score)
     {
-        GameManager.Instance.turnPlayer.score += score;
+        GameManager.Instance.TurnPlayer.score += score;
+        UIManager.Instance.ScoreUpdate();
+
         foreach (CardObj card in selectCardList)
         {
-            GameManager.Instance.turnPlayer.cards.Remove(card);
+            card.transform.position = Utills.MousePos;
+            GameManager.Instance.TurnPlayer.cards.Remove(card);
             card.Destroy();
         }
         selectCardList.Clear();
-        CardAlignment(GameManager.Instance.turnPlayer);
+        CardAlignment(GameManager.Instance.TurnPlayer);
     }
 
     public void CardDrag()

@@ -29,11 +29,21 @@ public class GameManager : MonoSingleton<GameManager>
     public static Action<Player> OnAddCard;
 
     [Header("Player")]
-    public Player turnPlayer;
+    private int _turnPlayerNum;
+    public Player TurnPlayer
+    {
+        get =>_turnPlayerNum == 1 ? player1 : player2;
+        set
+        {
+            if (value == player1) _turnPlayerNum = 1;
+            else _turnPlayerNum = 2;
+        }
+    }
     public Player player1 = new Player();
     public Player player2 = new Player();
 
     public GameObject canvas;
+    public PoolingListSO _initList;
 
     // 카메라 불러오는게 메모리를 엄청 잡아먹어서 한번만 불러옴
     private static Camera _mainCam = null;
@@ -54,8 +64,9 @@ public class GameManager : MonoSingleton<GameManager>
         //       string jsonData = JsonConvert.SerializeObject(cardList);
         string saveData = File.ReadAllText(Path.Combine(Application.dataPath, "Cards.json"));
         Card[] cardListArray = { };
-       CardManager.Instance.cardList =  JsonConvert.DeserializeObject<List<Card>>(saveData);
-     
+        CardManager.Instance.cardList =  JsonConvert.DeserializeObject<List<Card>>(saveData);
+
+        CreatePool();
         CardManager.Instance.Shuffle();
         StartCoroutine(StartGameCoroutine());
     }
@@ -64,7 +75,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            CardManager.Instance.AddCard(turnPlayer);
+            CardManager.Instance.AddCard(TurnPlayer);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -74,7 +85,18 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void SelectCard()
     {
-        CardManager.Instance.AddCard(turnPlayer);
+        if(isLoading == false)
+        {
+            CardManager.Instance.AddCard(TurnPlayer);
+        }
+    }
+
+    private void CreatePool()
+    {
+        foreach (PoolingPair pair in _initList.list)
+        {
+            PoolManager.Instance.CreatePool(pair.prefab, pair.poolCnt);
+        }
     }
 
     public void GameSetup()
@@ -83,13 +105,13 @@ public class GameManager : MonoSingleton<GameManager>
         {
             case TurnMode.Random:
                 int random = Random.Range(0, 2);
-                turnPlayer = random == 0 ? player1 : player2;
+                TurnPlayer = random == 0 ? player1 : player2;
                 break;
             case TurnMode.Player1:
-                turnPlayer = player2;
+                TurnPlayer = player2;
                 break;
             case TurnMode.Player2:
-                turnPlayer = player1;
+                TurnPlayer = player1;
                 break;
         }
     }
@@ -107,6 +129,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         isLoading = true;
         GameSetup();
+        UIManager.Instance.ScoreUpdate();
 
         if (isFastMode) delay = new WaitForSeconds(0.05f);
 
@@ -132,7 +155,27 @@ public class GameManager : MonoSingleton<GameManager>
     {
         isLoading = true;
         if(isGameStart == false)
-            StartCoroutine(turnPlayer.CardFlipCoroutine());
+            StartCoroutine(TurnPlayer.CardFlipCoroutine());
+
+        if(player1.score >= 30)
+        {
+            Debug.Log("Player1 Win");
+        }
+        else if(player2.score >= 30)
+        {
+            Debug.Log("Player2 Win");
+        }
+        else if(CardManager.Instance.cardList.Count == 0)
+        {
+            if(player1.score > player2.score)
+            {
+                Debug.Log("Player1 Win");
+            }
+            else
+            {
+                Debug.Log("Player2 Win");
+            }
+        }
 
         foreach(CardObj card in CardManager.Instance.selectCardList)
         {
@@ -140,26 +183,26 @@ public class GameManager : MonoSingleton<GameManager>
         }
         CardManager.Instance.selectCardList.Clear();
 
-        yield return new WaitForSeconds(turnPlayer.GetFlipTime());
+        yield return new WaitForSeconds(TurnPlayer.GetFlipTime());
 
-        if (turnPlayer == player1)
+        if (TurnPlayer == player1)
         {
-            turnPlayer = player2;
+            TurnPlayer = player2;
             MainCam.transform.DOLocalRotate(new Vector3(0, 0, 180), 0.5f);
             canvas.transform.DOLocalRotate(new Vector3(0, 0, 180), 0.5f);
         }
         else
         {
-            turnPlayer = player1;
+            TurnPlayer = player1;
             MainCam.transform.DOLocalRotate(new Vector3(0, 0, 360), 0.5f);
             canvas.transform.DOLocalRotate(new Vector3(0, 0, 360), 0.5f);
         }
 
         yield return new WaitForSeconds(0.6f);
-        StartCoroutine(turnPlayer.CardFlipCoroutine());
-        yield return new WaitForSeconds(turnPlayer.GetFlipTime());
+        StartCoroutine(TurnPlayer.CardFlipCoroutine());
+        yield return new WaitForSeconds(TurnPlayer.GetFlipTime());
         // 턴 메세지 안내
-        Debug.Log($"{turnPlayer} 턴");
+        Debug.Log($"{TurnPlayer} 턴");
         yield return new WaitForSeconds(0.5f);
         isLoading = false;
         if (isGameStart == true) isGameStart = false;

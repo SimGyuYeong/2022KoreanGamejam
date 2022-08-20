@@ -5,7 +5,7 @@ using TMPro;
 using DG.Tweening;
 
 
-public class CardObj : MonoBehaviour
+public class CardObj : PoolableMono
 {
     public Card card;
     public SpriteRenderer spriteRenderer;
@@ -53,9 +53,18 @@ public class CardObj : MonoBehaviour
         }
     }
 
+    public override void Reset()
+    {
+        IsSelected = false;
+        transform.localScale = Vector3.one * 0.5f;
+    }
+
     public void Destroy()
     {
-        Destroy(gameObject);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InOutQuad));
+        //seq.Join(spriteRenderer.DOColor(0, 0.5f));
+        seq.AppendCallback(() => PoolManager.Instance.Push(this));
     }
 
     private void OnMouseOver()
@@ -77,4 +86,6 @@ public class CardObj : MonoBehaviour
     {
         CardManager.Instance.CardMouseUp();
     }
+
+    
 }

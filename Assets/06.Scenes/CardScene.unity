@@ -1004,6 +1004,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawSound: {fileID: 8300000, guid: aa756ce98a3b0b14298bf957651a2363, type: 3}
+  throwSound: {fileID: 8300000, guid: 2dc3a00b2dd8f8444bbe8480cdc1392f, type: 3}
+  clickSound: {fileID: 8300000, guid: a4253eb1df35ff94c824d313f779ee59, type: 3}
   cardList: []
   selectCardList: []
   isCardDrag: 0
@@ -1663,6 +1665,7 @@ MonoBehaviour:
     cardListTrm: {fileID: 2145557104}
     cards: []
     _isFlip: 0
+    flipSound: {fileID: 8300000, guid: 7d8558d16143bbf41ae12fd72ddd805c, type: 3}
   player2:
     num: 1
     score: 0
@@ -1670,6 +1673,7 @@ MonoBehaviour:
     cardListTrm: {fileID: 479797547}
     cards: []
     _isFlip: 0
+    flipSound: {fileID: 8300000, guid: 7d8558d16143bbf41ae12fd72ddd805c, type: 3}
   canvas: {fileID: 1774109606}
   _initList: {fileID: 11400000, guid: 0146b8a71c91e2c4c9f318fe661fde86, type: 2}
 --- !u!4 &1256118094

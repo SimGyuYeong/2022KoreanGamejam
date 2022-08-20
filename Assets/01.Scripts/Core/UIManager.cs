@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
 
     public Sprite[] cardSprite;
     public Sprite backCardSprite;
+    public Sprite player1WinSprite;
+    public Sprite player2WinSprite;
+    public Transform playerWInTrm;
 
     public TextMeshProUGUI cardCntText;
 
@@ -23,6 +26,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI roundText;
 
     public GameObject exitObj;
+
+    [SerializeField] private Transform genalogyObj;
+
 
     private void Awake()
     {
@@ -64,6 +70,38 @@ public class UIManager : MonoBehaviour
     public void GameStop()
     {
         ChangeSceneManager.Instance.SceneChange("TitleScene");
+    }
+
+    public void ShowWinImage(int num)
+    {
+        Image image = playerWInTrm.GetComponent<Image>();
+        if (num == 0) image.sprite = player1WinSprite;
+        else image.sprite = player2WinSprite;
+
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(1f);
+        seq.Append(playerWInTrm.DOScale(Vector3.one * 1.2f, 0.3f));
+        seq.Append(playerWInTrm.DOScale(Vector3.one * 0.9f, 0.2f));
+        seq.Append(playerWInTrm.DOScale(Vector3.one, 0.1f));
+        seq.AppendInterval(2f);
+        seq.AppendCallback(() =>
+        {
+            ChangeSceneManager.Instance.SceneChange("RoundScene");
+        });
+    }
+
+    public void ClickGenalogy()
+    {
+        genalogyObj.DOScale(Vector3.one, 0.2f);
+        genalogyObj.Find("Background").GetComponent<Image>().DOFade(1, 0.2f);
+        genalogyObj.Find("Genalogy").GetComponent<Image>().DOFade(1, 0.2f);
+    }
+
+    public void CloseGenalogy()
+    {
+        genalogyObj.DOScale(Vector3.zero, 0.2f);
+        genalogyObj.Find("Background").GetComponent<Image>().DOFade(0, 0.2f);
+        genalogyObj.Find("Genalogy").GetComponent<Image>().DOFade(0, 0.2f);
     }
 
 }

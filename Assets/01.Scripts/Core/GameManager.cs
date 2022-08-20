@@ -80,10 +80,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameCoroutine());
     }
 
-    public void EndRound()
+    public void EndRound(int num)
     {
+        if (num == 1) RoundManager.Instance.player1Score += 1;
+        else RoundManager.Instance.player2Score += 1;
         RoundManager.Instance.round++;
-        ChangeSceneManager.Instance.SceneChange("RoundScene");
+        UIManager.Instance.ShowWinImage(num);
     }
 
     public void SelectCard()
@@ -165,21 +167,21 @@ public class GameManager : MonoBehaviour
 
         if(player1.score >= 30)
         {
-            Debug.Log("Player1 Win");
+            EndRound(1);
         }
         else if(player2.score >= 30)
         {
-            Debug.Log("Player2 Win");
+            EndRound(2);
         }
         else if(CardManager.Instance.cardList.Count == 0)
         {
             if(player1.score > player2.score)
             {
-                Debug.Log("Player1 Win");
+                EndRound(1);
             }
             else
             {
-                Debug.Log("Player2 Win");
+                EndRound(2);
             }
         }
 

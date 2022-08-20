@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : MonoSingleton<SoundManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    public AudioSource effectSource;
+    public AudioSource bgmSource;
+
+    public void PlayEffectSound(AudioClip clip)
     {
-        
+        effectSource.clip = clip;
+        effectSource.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayBgmSound(AudioClip clip)
     {
-        
+        bgmSource.clip = clip;
+        bgmSource.Play();
     }
 }

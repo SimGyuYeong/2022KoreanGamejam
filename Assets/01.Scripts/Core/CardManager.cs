@@ -13,6 +13,10 @@ class CardList
 
 public class CardManager : MonoSingleton<CardManager>
 {
+    public AudioClip drawSound;
+    public AudioClip throwSound;
+    public AudioClip clickSound;
+
     [Header("카드 목록들")]
     public List<Card> cardList = new List<Card>();  //전체카드
     public List<CardObj> selectCardList = new List<CardObj>(); //선택한 카드들
@@ -64,6 +68,7 @@ public class CardManager : MonoSingleton<CardManager>
 
     public void AddCard(Player player)
     {
+        SoundManager.Instance.PlayEffectSound(drawSound);
         GameManager.Instance.isLoading = true;
         var cardObj = PoolManager.Instance.Pop("Card");
         cardObj.transform.position = cardSpawnPosition.position;
@@ -224,6 +229,7 @@ public class CardManager : MonoSingleton<CardManager>
     {
         if(card.spriteRenderer.sprite != UIManager.Instance.backCardSprite)
         {
+            SoundManager.Instance.PlayEffectSound(clickSound);
             isCardDrag = true;
             if (card.IsSelected == false)
             {
@@ -244,6 +250,7 @@ public class CardManager : MonoSingleton<CardManager>
             isCardDrag = false;
             if (!_onCardArea)
             {
+                SoundManager.Instance.PlayEffectSound(throwSound);
                 Star star = selectCardList[0].card.star;
                 WeatherID weather = selectCardList[0].card.weather.weatherId;
                 string zodiac = selectCardList[0].card.zodiac;
@@ -259,8 +266,6 @@ public class CardManager : MonoSingleton<CardManager>
                     if (weather == card.card.weather.weatherId) weatherCnt++;
                     if (star == card.card.star) starCnt++;
                 }
-
-                Debug.Log(weatherCnt);
 
                 if (nothingCnt == 0)
                 {

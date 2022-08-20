@@ -12,12 +12,14 @@ public class Player
     public List<CardObj> cards = new List<CardObj>();
 
     public bool _isFlip = false;
+    public AudioClip flipSound;
 
     /// <summary>
     /// 카드 뒤집기 (턴이 바뀌면 카드가 뒤집어져야한다.)
     /// </summary>
     public IEnumerator CardFlipCoroutine(bool isSkip = false)
     {
+        SoundManager.Instance.PlayEffectSound(flipSound);
         _isFlip = !_isFlip;
 
         float time = 0.05f;

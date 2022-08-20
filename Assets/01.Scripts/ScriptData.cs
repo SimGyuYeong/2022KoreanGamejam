@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptData : MonoBehaviour
+public class ScriptData 
 {
     private List<Script> yangScript = new List<Script>();
     private List<Script> hwangsoScript = new List<Script>();
@@ -41,9 +41,9 @@ public class ScriptData : MonoBehaviour
 
     public List<Script> MulgogiScript => mulgogiScript;
 
-    void InitializeYang()
+   public void InitializeYang()
     {
-        yangScript.Add(new Script("아주 먼 옛날 아타마스라 , 불리는 왕이 살고 있었습니다.","1.mp3"));
+        yangScript.Add(new Script("아주 먼 옛날 아타마스라 불리는 왕이 살고 있었습니다.","1.mp3"));
         yangScript.Add(new Script("아타마스에게는 프릭소스와 헬레라는 두 자녀가 있었어요.","2.mp3"));
         yangScript.Add(new Script("프릭소스와 헬레의 어머니는 그들이 아주 어렸을 때 돌아가셨습니다.","3.mp3"));
         yangScript.Add(new Script("양어머니는 프릭소스와 헬레를 매우 미워해 괴롭히곤 했어요.","4.mp3"));
@@ -53,9 +53,9 @@ public class ScriptData : MonoBehaviour
         yangScript.Add(new Script("그것이 지금의 양자리가 되었습니다.","8.mp3"));
     }
 
-    void InitializeHwangso()
+   public void InitializeHwangso()
     {
-        hwangsoScript.Add(new Script("아주 먼 옛날 에우로파라는 , 아름다운 공주가 살고 있었어요","1.mp3"));  
+        hwangsoScript.Add(new Script("아주 먼 옛날 에우로파라는 아름다운 공주가 살고 있었어요","1.mp3"));  
         hwangsoScript.Add(new Script("화창한 봄날 에우로파가 바닷가에서 놀고 있을 때", "2.mp3"));
         hwangsoScript.Add(new Script("근처를 산책하던 제우스가 우연히 에우로파를 보게 되었고","3.mp3"));
         hwangsoScript.Add(new Script("제우스는 에우로파의 아름다운 모습에 반해 사랑에 빠지게 되었답니다.","4.mp3"));
@@ -68,9 +68,9 @@ public class ScriptData : MonoBehaviour
             
     }
 
-    void Initializessangdongyi()
+   public void Initializessangdongyi()
     {
-        ssangdongyiScript.Add(new Script("아주 먼 옛날 카스트로와 , 폴룩스라는 우애 좋은 형제가 살고 있었습니다.","1.mp3"));
+        ssangdongyiScript.Add(new Script("아주 먼 옛날 카스트로와 폴룩스라는 우애 좋은 형제가 살고 있었습니다.","1.mp3"));
         ssangdongyiScript.Add(new Script("형인 카스트로는 말을 아주 잘 탔으며","2.mp3"));
         ssangdongyiScript.Add(new Script("동생인 폴룩스는 무기 다루기에 능하였고 불사의 몸이기도 했죠.","3.mp3"));
         ssangdongyiScript.Add(new Script("청년이 되어 두 형제는 많은 모험을 함께하게 됩니다.","4.mp3"));
@@ -82,9 +82,9 @@ public class ScriptData : MonoBehaviour
 
     }
 
-    void Initializege()
+    public void Initializege()
     {
-        geScript.Add(new Script("아주 먼 옛날 헤라라는 , 여신이 살고 있었습니다.","1.mp3"));
+        geScript.Add(new Script("아주 먼 옛날 헤라라는 여신이 살고 있었습니다.","1.mp3"));
         geScript.Add(new Script("헤라는 영웅 헤라클레스를 매우 미워했어요.","2.mp3"));
         geScript.Add(new Script("헤라는 헤라클레스를 괴롭히기 위해 어려운 문제들을 해결하도록 시켰는데,", "3.mp3"));
         geScript.Add(new Script("그 중 하나가 바로 괴물 히드라를 죽이는 것이었습니다.","4.mp3"));
@@ -95,9 +95,9 @@ public class ScriptData : MonoBehaviour
 
     }
 
-    void Initializesaza()
+    public void Initializesaza()
     {
-        sazaScript.Add(new Script("아주 먼 옛날 포악한 , 괴물 네메아의 사자가 살고 있었어요.","1.mp3"));
+        sazaScript.Add(new Script("아주 먼 옛날 포악한 괴물 네메아의 사자가 살고 있었어요.","1.mp3"));
         sazaScript.Add(new Script("네메아의 사자는 여러 사람들을 물어 죽이고 가축을 잡아먹으며 큰 피해를 끼쳤습니다.","2.mp3"));
         sazaScript.Add(new Script("영웅 헤라클레스는 네메아의 사자를 사냥하기 위해 길을 나서게 되었어요.","3.mp3"));
         sazaScript.Add(new Script("네메아의 사자를 마주친 헤라클레스는 사자와 혈투를 벌이지만","4.mp3"));
@@ -107,9 +107,9 @@ public class ScriptData : MonoBehaviour
         sazaScript.Add(new Script("제우스는 헤라클레스의 업적을 기리기 위해 네메아의 사자를 별자리로 만들었습니다","8.mp3"));
     }
 
-    void InitializeCheonyeo()
+  public void InitializeCheonyeo()
     {
-        cheonyeoScript.Add(new Script("아주 먼 옛날 아스트라이아라는 , 여신이 살고 있었어요.","1.mp3"));
+        cheonyeoScript.Add(new Script("아주 먼 옛날 아스트라이아라는 여신이 살고 있었어요.","1.mp3"));
         cheonyeoScript.Add(new Script("옛날에는 신과 사람들이 지상에서 함께 어울리며 살았지만","2.mp3"));
         cheonyeoScript.Add(new Script("사람들 사이에 분쟁과 싸움이 일어나기 시작했고 그, 모습에 실망한 신들은 지상을 버리고 하늘로 돌아가게 됩니다.","3.mp3"));
         cheonyeoScript.Add(new Script("그 중 아스트라이아 한명만은 인간을 믿어 지상에 남아있기로 결심했어요.","4.mp3"));
@@ -119,7 +119,7 @@ public class ScriptData : MonoBehaviour
         cheonyeoScript.Add(new Script("이때 하늘로 돌아가던 아스트라이아의 모습이 지금의 처녀자리가 되었습니다.","8.mp3"));
     }
 
-    void InitializeCheoncing()
+   public void InitializeCheoncing()
     {
         cheonchingScript.Add(new Script("여신 아스트라이아는 늘 몸에 천칭을 지니고 다녔어요.","1.mp3"));
         cheonchingScript.Add(new Script("천칭은 인간의 선과 악을 재 운명을 결정하는 용도로 쓰이던 정의의 저울대입니다.","2.mp3"));
@@ -127,9 +127,9 @@ public class ScriptData : MonoBehaviour
         cheonchingScript.Add(new Script("그것이 지금의 천칭자리가 되었습니다.","4.mp3"));
     }
 
-    void InitializeJeongal()
+   public void InitializeJeongal()
     {
-        jeongalScript.Add(new Script("아주 먼 옛날 오리온이라는 , 사냥꾼이 살고 있었어요.","1.mp3"));
+        jeongalScript.Add(new Script("아주 먼 옛날 오리온이라는 사냥꾼이 살고 있었어요.","1.mp3"));
         jeongalScript.Add(new Script("오리온은 매우 뛰어난 사냥 실력을 지닌 타고난 사냥꾼이었습니다.","2.mp3"));
         jeongalScript.Add(new Script("그 뛰어난 실력 덕에 오리온은 사냥의 여신 아르테미스와 친해지게 되었어요","3.mp3"));
         jeongalScript.Add(new Script("오리온은 아르테미스와 함께 사냥을 다니며 매우 자만에 빠지게 됩니다.","4.mp3"));
@@ -139,12 +139,12 @@ public class ScriptData : MonoBehaviour
 
     }
 
-    void InitializeSasu()
+  public  void InitializeSasu()
     {
-        sasuScript.Add(new Script("아주 먼 옛날 케이론이라는 , 현자가 살고 있었어요.","1.mp3"));
+        sasuScript.Add(new Script("아주 먼 옛날 케이론이라는 현자가 살고 있었어요.","1.mp3"));
         sasuScript.Add(new Script("케이론은 온화하고 현명한 성품을 지니고 있었습니다.","2.mp3"));
         sasuScript.Add(new Script("현자라 칭송받던 케이론은 많은 영웅들을 교육하고 키워냈어요.","3.mp3"));
-        sasuScript.Add(new Script("헤라클레스 아킬레우스 , 등 여러 영웅들이 케이론의 교육을 받았답니다.","4.mp3"));
+        sasuScript.Add(new Script("헤라클레스 아킬레우스, 등 여러 영웅들이 케이론의 교육을 받았답니다.","4.mp3"));
         sasuScript.Add(new Script("제자인 헤라클레스는 켄타우로스와 싸움을 하던 중 그만 , 실수로 케이론에게 화살을 쏴 버리고 말았어요","5.mp3"));
         sasuScript.Add(new Script("케이론은 고통스러워하다 결국 죽음에 이르렀습니다","6.mp3"));
         sasuScript.Add(new Script("이를 안타깝게 여긴 제우스는 그를 하늘의 별자리로 만들어 주었고","7.mp3"));
@@ -152,7 +152,7 @@ public class ScriptData : MonoBehaviour
 
     }
 
-    void InitializeYeomso()
+   public void InitializeYeomso()
     {
         yeomsoScript.Add(new Script("아주 먼 옛날 어느 날에 신들은 나일 강 주변에서 연회를 열었습니다","1.mp3"));
         yeomsoScript.Add(new Script("신들은 갈대 피리를 불기도 하고 춤을 , 추기도 하면서 즐겁게 연회를 즐겼어요.","2.mp3"));
@@ -165,9 +165,9 @@ public class ScriptData : MonoBehaviour
 
     }
 
-    void InitializeMulbyeong()
+  public  void InitializeMulbyeong()
     {
-        mulbyeongScript.Add(new Script("아주 먼 옛날 헤베라는 , 여신이 살고 있었어요","1.mp3"));
+        mulbyeongScript.Add(new Script("아주 먼 옛날 헤베라는 여신이 살고 있었어요","1.mp3"));
         mulbyeongScript.Add(new Script("헤베는 신들을 위해 술을 따르는 일을 도맡아 하고 있었습니다.","2.mp3"));
         mulbyeongScript.Add(new Script("그러나 어느 날 헤베는 발목을 다치게 되고 술을 , 따르는 일을 계속하기 어려워졌어요.","3.mp3"));
         mulbyeongScript.Add(new Script("제우스는 헤베를 위해 독수리로 변해서 가니메데라는 소년을 납치해왔습니다.","4.mp3"));
@@ -176,9 +176,9 @@ public class ScriptData : MonoBehaviour
          mulbyeongScript.Add(new Script("그것이 지금의 물병자리가 되었습니다.","7.mp3"));
     }
 
-    void InitializeMulgogi()
+  public  void InitializeMulgogi()
     {
-        mulgogiScript.Add(new Script("아주 먼 옛날 여신 , 아프로디테와 그 아들 에로스가 살고 있었어요.","1.mp3"));
+        mulgogiScript.Add(new Script("아주 먼 옛날 여신 아프로디테와 그 아들 에로스가 살고 있었어요.","1.mp3"));
         mulgogiScript.Add(new Script("아프로디테와 에로스는 강을 건너다 괴물 티폰을 만나게 됩니다.","2.mp3"));
         mulgogiScript.Add(new Script("갑자기 나타난 티폰에 아프로디테와 에로스는 크게 놀랐어요.","3.mp3"));
         mulgogiScript.Add(new Script("그리고 재빨리 물고기로 변신해 도망쳤습니다.","4.mp3"));

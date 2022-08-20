@@ -80,13 +80,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameCoroutine());
     }
 
-    private void Update()
+    public void EndRound()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            RoundManager.Instance.round++;
-            ChangeSceneManager.Instance.SceneChange("TitleScene");
-        }
+        RoundManager.Instance.round++;
+        ChangeSceneManager.Instance.SceneChange("RoundScene");
     }
 
     public void SelectCard()

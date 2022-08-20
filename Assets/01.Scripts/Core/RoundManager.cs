@@ -27,6 +27,48 @@ public class RoundManager : MonoSingleton<RoundManager>
     public void SelectRound(int round)
     {
         this.round = round;
-        ChangeSceneManager.Instance.SceneChange("CardScene");
+
+        string name = "yang";
+        switch(round)
+        { 
+            case 1:
+                name = "yang";
+                break;
+            case 2:
+                name = "hwangso";
+                break;
+            case 3:
+                name = "ssangdongyi";
+                break;
+            case 4:
+                name = "ge";
+                break;
+            case 5:
+                name = "saza";
+                break;
+            case 6:
+                name = "cheonyeo";
+                break;
+            case 7:
+                name = "cheonching";
+                break;
+            case 8:
+                name = "jeongal";
+                break;
+            case 9:
+                name = "sasu";
+                break;
+            case 10:
+                name = "yeomso";
+                break;
+            case 11:
+                name = "mulbyeong";
+                break;
+            case 12:
+                name = "mulgogi";
+                break;
+        }
+        PlayerPrefs.SetString("star", name);
+        ChangeSceneManager.Instance.SceneChange("StoryScene");
     }
 }

@@ -9,9 +9,18 @@ EditorBuildSettings:
     path: Assets/06.Scenes/InitScene.unity
     guid: 9afe387ad6ac6754ca4164937f8f1e17
   - enabled: 1
-    path: Assets/06.Scenes/TitleScene.unity
+    path: Assets/06.Scenes/RoundScene.unity
     guid: 695afaa2607c3ae41aa307df5795d74e
   - enabled: 1
     path: Assets/06.Scenes/CardScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/06.Scenes/TitleScene.unity
+    guid: 04220ada31d309d46b29cecd4dac8860
+  - enabled: 1
+    path: Assets/06.Scenes/TutorialScene.unity
+    guid: 6b725b2170d06bc46bd9818fccc80471
+  - enabled: 1
+    path: Assets/06.Scenes/StoryScene.unity
+    guid: e7f3fec64a8a6004980d17cf4c8a6808
   m_configObjects: {}

@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour
         isLoading = true;
         GameSetup();
         UIManager.Instance.ScoreUpdate();
+        //SoundManager.Instance.PlayBgmSound(SoundManager.Instance.bgmList[round]);
+        UIManager.Instance.RoundUpdate();
 
         if (isFastMode) delay = new WaitForSeconds(0.05f);
 

@@ -13,12 +13,23 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI cardCntText;
 
+    public GameObject player1ScoreObj;
+    public GameObject player2ScoreObj;
+
     public TextMeshProUGUI player1ScoreText;
     public TextMeshProUGUI player2ScoreText;
+
+    public TextMeshProUGUI roundText;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        player1ScoreObj.transform.Find("Player1RoundScore").GetComponent<TextMeshProUGUI>().text = RoundManager.Instance.player1Score.ToString();
+        player2ScoreObj.transform.Find("Player2RoundScore").GetComponent<TextMeshProUGUI>().text = RoundManager.Instance.player2Score.ToString();
     }
 
     public void CardCntUpdate()
@@ -30,5 +41,10 @@ public class UIManager : MonoBehaviour
     {
         player1ScoreText.text = GameManager.Instance.player1.score.ToString();
         player2ScoreText.text = GameManager.Instance.player2.score.ToString();
+    }
+
+    public void RoundUpdate()
+    {
+        roundText.text = GameManager.Instance.round.ToString();
     }
 }

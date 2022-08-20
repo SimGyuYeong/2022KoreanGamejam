@@ -9,6 +9,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource effectSource;
     public AudioSource bgmSource;
 
+    public List<AudioClip> bgmList = new List<AudioClip>();
+
     private void Awake()
     {
         Instance = this;
@@ -22,7 +24,13 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBgmSound(AudioClip clip)
     {
+        bgmSource.Stop();
         bgmSource.clip = clip;
         bgmSource.Play();
+    }
+
+    public void StopBgmSound()
+    {
+        bgmSource.Stop();
     }
 }

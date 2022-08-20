@@ -8,4 +8,9 @@ public class TitleManager : MonoBehaviour
     {
         ChangeSceneManager.Instance.SceneChange("RoundScene");
     }
+
+    public void ClickTuto()
+    {
+        ChangeSceneManager.Instance.SceneChange("TutorialScene");
+    }
 }

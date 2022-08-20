@@ -13,11 +13,13 @@ class CardList
 
 public class CardManager : MonoSingleton<CardManager>
 {
+    [Header("카드 목록들")]
     public List<Card> cardList = new List<Card>();  //전체카드
     public List<CardObj> selectCardList = new List<CardObj>(); //선택한 카드들
 
     public bool isCardDrag = false;
 
+    [Header("카드 덱")]
     public GameObject cardPrefab;
     public Transform cardSpawnPosition;
 
@@ -26,6 +28,12 @@ public class CardManager : MonoSingleton<CardManager>
     public Transform player2CardLeft;
     public Transform player2CardRight;
     private bool _onCardArea;
+
+    [Header("점수")]
+    public int pareScore;
+    public int threepleScore;
+    public int seasonScore;
+    public int forCardScore;
 
     private void Start()
     {
@@ -198,30 +206,65 @@ public class CardManager : MonoSingleton<CardManager>
 
     public void CardClick(CardObj card)
     {
-        isCardDrag = true;
-        if(card.isSelected == false)
+        if(card.spriteRenderer.sprite != UIManager.Instance.backCardSprite)
         {
-            selectCardList.Add(card);
+            isCardDrag = true;
+            if (card.IsSelected == false)
+            {
+                selectCardList.Add(card);
+            }
+            else
+            {
+                selectCardList.Remove(card);
+            }
+            card.IsSelected = !card.IsSelected;
         }
-        else
-        {
-            selectCardList.Remove(card);
-        }
-        card.isSelected = !card.isSelected;
     }
 
     public void CardMouseUp()
     {
-        isCardDrag = false;
-        if(!_onCardArea)
+        if(isCardDrag == true)
         {
-            foreach(CardObj card in selectCardList)
+            isCardDrag = false;
+            if (!_onCardArea)
             {
-                GameManager.Instance.turnPlayer.cards.Remove(card);
-                card.Destroy();
+                Star star = selectCardList[0].card.star;
+                WeatherID weather = selectCardList[0].card.weather.weatherId;
+                string zodiac = selectCardList[0].card.zodiac;
+
+                int starCnt = 0;
+                int weatherCnt = 0;
+                int zodiacCnt = 0;
+                int nothingCnt = 0;
+                
+                foreach(CardObj card in selectCardList)
+                {
+                    if (star == card.card.star) starCnt++;
+                    else if (weather == card.card.weather.weatherId) weatherCnt++;
+                    else if (zodiac == card.card.zodiac) zodiacCnt++;
+                }
+
+                if (nothingCnt == 0)
+                {
+                    if (zodiacCnt == 4 && selectCardList.Count == 4) CardThrowSuccess(forCardScore);
+                    else if (weatherCnt == 5 && selectCardList.Count == 5) CardThrowSuccess(seasonScore);
+                    else if (starCnt == 3 && selectCardList.Count == 3) CardThrowSuccess(threepleScore);
+                    else if (starCnt == 2 && selectCardList.Count == 2) CardThrowSuccess(pareScore);
+                }
             }
-            selectCardList.Clear();
         }
+    }
+
+    public void CardThrowSuccess(int score)
+    {
+        GameManager.Instance.turnPlayer.score += score;
+        foreach (CardObj card in selectCardList)
+        {
+            GameManager.Instance.turnPlayer.cards.Remove(card);
+            card.Destroy();
+        }
+        selectCardList.Clear();
+        CardAlignment(GameManager.Instance.turnPlayer);
     }
 
     public void CardDrag()

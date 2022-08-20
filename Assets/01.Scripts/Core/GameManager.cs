@@ -9,6 +9,8 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public int round = 0;
+
     [Header("Turn")]
     public TurnMode turnMode;
     [SerializeField] int startCardCnt = 10;
@@ -131,6 +133,12 @@ public class GameManager : MonoSingleton<GameManager>
         isLoading = true;
         if(isGameStart == false)
             StartCoroutine(turnPlayer.CardFlipCoroutine());
+
+        foreach(CardObj card in CardManager.Instance.selectCardList)
+        {
+            card.IsSelected = false;
+        }
+        CardManager.Instance.selectCardList.Clear();
 
         yield return new WaitForSeconds(turnPlayer.GetFlipTime());
 

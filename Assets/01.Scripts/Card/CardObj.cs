@@ -10,11 +10,23 @@ public class CardObj : MonoBehaviour
     public Card card;
     public SpriteRenderer spriteRenderer;
     public PRS originPRS;
-    public bool isSelected;
+    private GameObject _outline;
+
+    private bool _isSelected = false;
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set
+        {
+            _isSelected = value;
+            _outline.SetActive(value);
+        }
+    }
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        _outline = transform.Find("Outline").gameObject;
     }
 
     public void Setup(Card card)
@@ -43,7 +55,7 @@ public class CardObj : MonoBehaviour
 
     public void Destroy()
     {
-
+        Destroy(gameObject);
     }
 
     private void OnMouseOver()

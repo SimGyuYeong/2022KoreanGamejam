@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Order : MonoBehaviour
 {
+    [SerializeField] private Renderer[] backRenderers;
+    [SerializeField] private Renderer[] middleRenderers;
     [SerializeField] private string _sortingLayerName;
     public int originOrder;
 
@@ -21,10 +23,19 @@ public class Order : MonoBehaviour
 
     public void SetOrder(int order)
     {
-        order *= 10;
+        int mulOrder = order * 10;
 
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.sortingLayerName = _sortingLayerName;
-        renderer.sortingOrder = order;
+        foreach(var renderer in backRenderers)
+        {
+            renderer.sortingLayerName = _sortingLayerName;
+            renderer.sortingOrder = mulOrder;
+        }
+
+
+        foreach (var renderer in middleRenderers)
+        {
+            renderer.sortingLayerName = _sortingLayerName;
+            renderer.sortingOrder = mulOrder + 1;
+        }
     }
 }

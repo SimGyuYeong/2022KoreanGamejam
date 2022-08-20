@@ -410,7 +410,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.221523, y: -3.4697862}
+  m_Offset: {x: 4.979608, y: -3.0458727}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -421,7 +421,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.198453, y: 3.0886095}
+  m_Size: {x: 7.8803854, y: 3.9364367}
   m_EdgeRadius: 0
 --- !u!1 &479797546
 GameObject:
@@ -851,7 +851,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8818831a1048804084c84cdce8fbbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardList: []
+  cardList:
+  - weather:
+      weatherId: 0
+    star: 0
+    cardName: 
+    zodiac: 
+    spriteNum: 0
   selectCardList: []
   isCardDrag: 0
   cardPrefab: {fileID: 2762413198283972123, guid: f5b6b1c4fc8391641944151e8d210c17, type: 3}
@@ -860,6 +866,10 @@ MonoBehaviour:
   player1CardRight: {fileID: 103868523}
   player2CardLeft: {fileID: 1847838205}
   player2CardRight: {fileID: 614108027}
+  pareScore: 0
+  threepleScore: 0
+  seasonScore: 0
+  forCardScore: 0
 --- !u!1 &937962214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,6 +1231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82f8518abeb194469675befee7cdbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  round: 0
   turnMode: 0
   startCardCnt: 10
   isFastMode: 1
@@ -1228,16 +1239,22 @@ MonoBehaviour:
   isGameStart: 1
   turnPlayer:
     num: 0
+    score: 0
+    roundScore: 0
     cardListTrm: {fileID: 0}
     cards: []
     _isFlip: 0
   player1:
     num: 0
+    score: 0
+    roundScore: 0
     cardListTrm: {fileID: 2145557104}
     cards: []
     _isFlip: 0
   player2:
     num: 1
+    score: 0
+    roundScore: 0
     cardListTrm: {fileID: 479797547}
     cards: []
     _isFlip: 0
@@ -1582,7 +1599,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.221523, y: -3.4697862}
+  m_Offset: {x: 5.5148945, y: -3.899273}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1593,7 +1610,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.198453, y: 3.0886095}
+  m_Size: {x: 7.9116344, y: 3.9475832}
   m_EdgeRadius: 0
 --- !u!1 &1650053333
 GameObject:

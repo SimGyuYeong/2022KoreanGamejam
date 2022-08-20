@@ -3,15 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
-[SerializeField]
-class CardList
-{
-    public Card[] Cards; 
-}
+using DG.Tweening;
+using System;
+using Random = UnityEngine.Random;
+
 public class GameManager : MonoSingleton<GameManager>
 {
-    public List<Card> cardList = new List<Card>();  //전체카드
+    [Header("Turn")]
+    public TurnMode turnMode;
+    int startCardCnt = 10;
+    public bool isFastMode = false;
 
+    public enum TurnMode
+    {
+        Random,
+        Player1,
+        Player2
+    }
+    WaitForSeconds delay = new WaitForSeconds(0.5f);
+
+    public static Action<Player> OnAddCard;
+
+    [Header("Player")]
+    private Player _turnPlayer;
     public Player player1 = new Player();
     public Player player2 = new Player();
 
@@ -20,52 +34,64 @@ public class GameManager : MonoSingleton<GameManager>
         //       string jsonData = JsonConvert.SerializeObject(cardList);
         string saveData = File.ReadAllText(Path.Combine(Application.dataPath, "Cards.json"));
         Card[] cardListArray = { };
-       cardList =  JsonConvert.DeserializeObject<List<Card>>(saveData);
+       CardManager.Instance.cardList =  JsonConvert.DeserializeObject<List<Card>>(saveData);
      
-        Shuffle();
-    }
-
-    private void Start()
-    {
-        for(int i = 0; i < 1; i ++)
-        {
-            player1.AddCard(ChooseCard());
-            player2.AddCard(ChooseCard());
-        }
+        CardManager.Instance.Shuffle();
+        StartCoroutine(StartGameCoroutine());
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            player1.AddCard(ChooseCard());
+            CardManager.Instance.AddCard(_turnPlayer);
         }
-        if(Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            player2.AddCard(ChooseCard());
+            if (_turnPlayer == player1)
+            {
+                _turnPlayer = player2;
+                CardManager.Instance.cardSpawnPosition.DOLocalRotate(new Vector3(0, 0, 360), 0);
+                Camera.main.transform.DOLocalRotate(new Vector3(0, 0, 180), 0.5f);
+            }
+            else
+            {
+                _turnPlayer = player1;
+                CardManager.Instance.cardSpawnPosition.DOLocalRotate(new Vector3(0, 0, 180), 0);
+                Camera.main.transform.DOLocalRotate(new Vector3(0, 0, 360), 0.5f);
+            }
         }
     }
 
-    public Card ChooseCard()
+    public void GameSetup()
     {
-        Card card = cardList[0];
-        cardList.Remove(card);
-        return card;
+        switch(turnMode)
+        {
+            case TurnMode.Random:
+                int random = Random.Range(0, 2);
+                _turnPlayer = random == 0 ? player1 : player2;
+                break;
+            case TurnMode.Player1:
+                _turnPlayer = player1;
+                break;
+            case TurnMode.Player2:
+                _turnPlayer = player2;
+                break;
+        }
     }
 
-    public void Shuffle()
+    public IEnumerator StartGameCoroutine()
     {
-        int idx1, idx2;
-        Card tempCard;
+        GameSetup();
 
-        //100번 정도 섞음
-        for (int i = 0; i < 100; i++)
+        if (isFastMode) delay = new WaitForSeconds(0.05f);
+
+        for(int i = 0; i < startCardCnt; i++)
         {
-            idx1 = Random.Range(0, 47);
-            idx2 = Random.Range(0, 47);
-            tempCard = cardList[idx1];
-            cardList[idx1] = cardList[idx2];
-            cardList[idx2] = tempCard;
+            yield return delay;
+            OnAddCard?.Invoke(player1);
+            yield return delay;
+            OnAddCard?.Invoke(player2);
         }
     }
 }

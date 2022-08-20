@@ -6,11 +6,5 @@ using UnityEngine;
 public class Player
 {
     public int num;
-    public List<Card> cards = new List<Card>();
-
-    public void AddCard(Card card)
-    {
-        cards.Add(card);
-        UIManager.Instance.AddCardUI(num, card);
-    }
+    public List<CardObj> cards = new List<CardObj>();
 }

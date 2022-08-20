@@ -78,6 +78,7 @@ public class CardManager : MonoSingleton<CardManager>
 
         SetOriginOrder(player);
         CardAlignment(player);
+
     }
 
     private void CardAlignment(Player player)

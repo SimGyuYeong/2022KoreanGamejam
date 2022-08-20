@@ -772,10 +772,10 @@ MonoBehaviour:
   player1CardRight: {fileID: 103868523}
   player2CardLeft: {fileID: 1847838205}
   player2CardRight: {fileID: 614108027}
-  pareScore: 0
-  threepleScore: 0
-  seasonScore: 0
-  forCardScore: 0
+  pareScore: 1
+  threepleScore: 3
+  seasonScore: 5
+  forCardScore: 10
 --- !u!1 &937962214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,13 +1415,6 @@ MonoBehaviour:
   isFastMode: 1
   isLoading: 0
   isGameStart: 1
-  turnPlayer:
-    num: 0
-    score: 0
-    roundScore: 0
-    cardListTrm: {fileID: 0}
-    cards: []
-    _isFlip: 0
   player1:
     num: 0
     score: 0
@@ -1859,8 +1852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20.9042, y: -16.7085}
-  m_SizeDelta: {x: 219.1484, y: 343.6974}
+  m_AnchoredPosition: {x: -11.8501, y: 8.8558}
+  m_SizeDelta: {x: 284.657, y: 394.826}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664988306
 MonoBehaviour:

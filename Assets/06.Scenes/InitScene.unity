@@ -1139,7 +1139,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectSource: {fileID: 1185153686}
   bgmSource: {fileID: 1185153685}
-  bgmList: []
+  bgmList:
+  - {fileID: 8300000, guid: c9f9d80e04d9148448d92d9bf88a190d, type: 3}
+  - {fileID: 8300000, guid: 9769da286ae015048bf627cb8b03cde7, type: 3}
+  - {fileID: 8300000, guid: e4e830590f60f664bb78e2d8b172b804, type: 3}
+  - {fileID: 8300000, guid: db5d06bf2d6b85940bf5828a5fefd24b, type: 3}
+  - {fileID: 8300000, guid: d18dacb466c8aff46aae00593cbaaf17, type: 3}
+  - {fileID: 8300000, guid: ac735f7f168932c4c88a3ac23c27bc70, type: 3}
+  - {fileID: 8300000, guid: 3cca314cb392e854b919b37d4733a781, type: 3}
+  - {fileID: 8300000, guid: d311b77bbb2a8d64cac551a224d53856, type: 3}
+  - {fileID: 8300000, guid: 12c23f75d356063498e5541ccac60e6f, type: 3}
+  - {fileID: 8300000, guid: 1fe1e4b88cee0c048817106ef259a609, type: 3}
+  - {fileID: 8300000, guid: 8f472c9d4b321374dac84cd21ea005cd, type: 3}
+  - {fileID: 8300000, guid: 3eecc7fdec8b73a4db4787b55fc1382b, type: 3}
+  lobbySound: {fileID: 8300000, guid: ba55e1180b164224cbe91ac069cdfaa2, type: 3}
 --- !u!4 &1185153688
 Transform:
   m_ObjectHideFlags: 0

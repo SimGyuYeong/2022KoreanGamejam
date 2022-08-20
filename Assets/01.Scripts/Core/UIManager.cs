@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public GameObject exitObj;
 
     [SerializeField] private Transform genalogyObj;
+    [SerializeField] private AudioClip winAudio;
 
 
     private void Awake()
@@ -78,14 +79,17 @@ public class UIManager : MonoBehaviour
         if (num == 0) image.sprite = player1WinSprite;
         else image.sprite = player2WinSprite;
 
+        
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1f);
         seq.Append(playerWInTrm.DOScale(Vector3.one * 1.2f, 0.3f));
         seq.Append(playerWInTrm.DOScale(Vector3.one * 0.9f, 0.2f));
+        seq.AppendCallback(() => SoundManager.Instance.PlayEffectSound(winAudio));
         seq.Append(playerWInTrm.DOScale(Vector3.one, 0.1f));
         seq.AppendInterval(2f);
         seq.AppendCallback(() =>
         {
+            SoundManager.Instance.PlayBgmSound(SoundManager.Instance.lobbySound);
             ChangeSceneManager.Instance.SceneChange("RoundScene");
         });
     }

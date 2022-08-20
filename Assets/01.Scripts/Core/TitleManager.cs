@@ -8,6 +8,11 @@ public class TitleManager : MonoBehaviour
 {
     [SerializeField] private Transform genalogyObj;
 
+    private void Start()
+    {
+        SoundManager.Instance.PlayBgmSound(SoundManager.Instance.lobbySound);
+    }
+
     public void ClickRound()
     {
         ChangeSceneManager.Instance.SceneChange("RoundScene");

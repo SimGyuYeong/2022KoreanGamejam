@@ -11,9 +11,14 @@ public class SoundManager : MonoBehaviour
 
     public List<AudioClip> bgmList = new List<AudioClip>();
 
+    public AudioClip lobbySound;
+
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        bgmSource.volume -= 0.5f;
     }
 
     public void PlayEffectSound(AudioClip clip)
@@ -24,7 +29,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBgmSound(AudioClip clip)
     {
-        bgmSource.Stop();
+        if(bgmSource.isPlaying) bgmSource.Stop();
         bgmSource.clip = clip;
         bgmSource.Play();
     }

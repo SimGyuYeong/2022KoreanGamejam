@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoSingleton<RoundManager>
 {
@@ -11,11 +12,21 @@ public class RoundManager : MonoSingleton<RoundManager>
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        var obj = FindObjectsOfType<RoundManager>();
+
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SelectRound(int round)
     {
         this.round = round;
+        ChangeSceneManager.Instance.SceneChange("CardScene");
     }
 }

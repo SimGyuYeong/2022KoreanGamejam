@@ -16,17 +16,13 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                 Debug.LogWarning("[MonoSinngleTon] Instance" + typeof(T) + "aleready destroyed. Returning null.");
                 return null;
             }
-            lock (locker)
+            if (instance == null)
             {
+                instance = (T)FindObjectOfType(typeof(T));
                 if (instance == null)
                 {
-                    instance = (T)FindObjectOfType(typeof(T));
-                    if (instance == null)
-                    {
-                        GameObject temp = new GameObject(typeof(T).ToString());
-                        instance = temp.AddComponent<T>();
-                        DontDestroyOnLoad(temp);
-                    }
+                    GameObject temp = new GameObject(typeof(T).ToString());
+                    instance = temp.AddComponent<T>();
                 }
             }
             return instance;

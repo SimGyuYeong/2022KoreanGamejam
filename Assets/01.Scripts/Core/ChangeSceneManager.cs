@@ -3,10 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ChangeSceneManager : MonoSingleton<ChangeSceneManager>
 {
-    [SerializeField] private SpriteRenderer _backgroundRenderer;
+    private Image _backgroundImage;
+    private Slider _slider;
+    private GameObject _loadingObj;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        _backgroundImage = GetComponentInChildren<Image>();
+        _slider = GetComponentInChildren<Slider>();
+        _loadingObj = transform.Find("Canvas/LoadingObj").gameObject;
+    }
 
     private void Update()
     {
@@ -23,11 +34,14 @@ public class ChangeSceneManager : MonoSingleton<ChangeSceneManager>
      
     private IEnumerator SceneChangeCoroutine(string scene)
     {
-        _backgroundRenderer.DOFade(1, 0.4f);
+        _backgroundImage.DOFade(1, 0.4f);
+        _loadingObj.transform.DOScale(Vector3.one, 0.2f);
         yield return new WaitForSeconds(0.4f);
-        DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene(scene);
-        yield return new WaitForSeconds(1f);
-        _backgroundRenderer.DOFade(0, 0.4f);
+        _slider.DOValue(1f, 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        _loadingObj.transform.DOScale(Vector3.zero, 0.2f);
+        _backgroundImage.DOFade(0, 0.4f);
+        _slider.value = 0;
     }
 }

@@ -7,8 +7,10 @@ using DG.Tweening;
 using System;
 using Random = UnityEngine.Random;
 
-public class GameManager : MonoSingleton<GameManager>
+public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     public int round = 0;
 
     [Header("Turn")]
@@ -61,6 +63,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
+        Instance = this;
+
         //       string jsonData = JsonConvert.SerializeObject(cardList);
         string saveData = File.ReadAllText(Path.Combine(Application.dataPath, "Cards.json"));
         Card[] cardListArray = { };
@@ -68,6 +72,11 @@ public class GameManager : MonoSingleton<GameManager>
 
         CreatePool();
         CardManager.Instance.Shuffle();
+    }
+
+    private void Start()
+    {
+        round = RoundManager.Instance.round;
         StartCoroutine(StartGameCoroutine());
     }
 
@@ -75,11 +84,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            CardManager.Instance.AddCard(TurnPlayer);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartCoroutine(NextTurnCoroutine());
+            RoundManager.Instance.round++;
+            ChangeSceneManager.Instance.SceneChange("TitleScene");
         }
     }
 
@@ -127,6 +133,7 @@ public class GameManager : MonoSingleton<GameManager>
     /// <returns></returns>
     public IEnumerator StartGameCoroutine()
     {
+        yield return new WaitForSeconds(2f);
         isLoading = true;
         GameSetup();
         UIManager.Instance.ScoreUpdate();

@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIManager : MonoSingleton<UIManager>
+public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     public Sprite[] cardSprite;
     public Sprite backCardSprite;
 
@@ -13,6 +15,11 @@ public class UIManager : MonoSingleton<UIManager>
 
     public TextMeshProUGUI player1ScoreText;
     public TextMeshProUGUI player2ScoreText;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void CardCntUpdate()
     {

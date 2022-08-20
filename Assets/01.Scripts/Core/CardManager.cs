@@ -11,8 +11,10 @@ class CardList
     public Card[] Cards;
 }
 
-public class CardManager : MonoSingleton<CardManager>
+public class CardManager : MonoBehaviour
 {
+    public static CardManager Instance;
+
     public AudioClip drawSound;
     public AudioClip throwSound;
     public AudioClip clickSound;
@@ -38,6 +40,11 @@ public class CardManager : MonoSingleton<CardManager>
     public int threepleScore;
     public int seasonScore;
     public int forCardScore;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

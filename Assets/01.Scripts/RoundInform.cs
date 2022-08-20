@@ -8,10 +8,15 @@ public class RoundInform : MonoBehaviour
     public int roundNum;
     public bool isOpen = false;
     private Button _button;
+    private Image _image;
+
+    public Sprite defaultImage;
+    public Sprite rockedImage;
 
     private void Awake()
     {
         _button = GetComponent<Button>();
+        _image = GetComponent<Image>();
     }
 
     private void Start()
@@ -19,10 +24,12 @@ public class RoundInform : MonoBehaviour
         if(roundNum <= RoundManager.Instance.round)
         {
             _button.enabled = true;
+            _image.sprite = defaultImage;
         }
         else
         {
             _button.enabled = false;
+            _image.sprite = rockedImage;
         }
     }
 

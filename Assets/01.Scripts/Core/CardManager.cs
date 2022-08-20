@@ -146,4 +146,39 @@ public class CardManager : MonoSingleton<CardManager>
             cardList[idx2] = tempCard;
         }
     }
+
+
+    #region 카드 확대
+
+    public void CardMouseOver(CardObj card)
+    {
+        EnlargeCard(true, card, GameManager.Instance.turnPlayer == GameManager.Instance.player1);
+    }
+
+    public void CardMouseExit(CardObj card)
+    {
+        EnlargeCard(false, card, GameManager.Instance.turnPlayer == GameManager.Instance.player1);
+    }
+
+    private void EnlargeCard(bool isEnlarge, CardObj card, bool isPlayer1)
+    {
+        if(!GameManager.Instance.isLoading)
+        {
+            if (isEnlarge)
+            {
+                Vector3 enlargePos = new Vector3(card.originPRS.pos.x, (isPlayer1 ? -3f : 3f), -10f);
+                card.MoveTrm(new PRS(enlargePos, card.originPRS.rot, Vector3.one * 0.7f), false);
+            }
+            else
+            {
+                card.MoveTrm(card.originPRS, false);
+            }
+
+            card.GetComponent<Order>().SetMostFrontOrder(isEnlarge);
+        }
+    }
+
+    #endregion
+
+
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5809288976846618693}
   - component: {fileID: 3098106944868517581}
   - component: {fileID: 7614818006591675812}
+  - component: {fileID: 4684370779071785378}
   m_Layer: 6
   m_Name: Card
   m_TagString: Untagged
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 3.26, y: 5.61}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3098106944868517581
@@ -104,7 +105,8 @@ MonoBehaviour:
     star: 0
     cardName: 
     zodiac: 
-  sprite: {fileID: 0}
+    spriteNum: 0
+  spriteRenderer: {fileID: 0}
   originPRS:
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0, w: 0}
@@ -123,3 +125,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sortingLayerName: Card
   originOrder: 0
+--- !u!60 &4684370779071785378
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2762413198283972123}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.26, y: 5.61}
+    newSize: {x: 3.26, y: 5.61}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.54, y: 2.8049998}
+      - {x: -1.63, y: 2.705}
+      - {x: -1.63, y: -2.7949998}
+      - {x: -0.7840302, y: -2.8004673}
+      - {x: -0.5145482, y: -3.3789122}
+      - {x: 0.7963973, y: -3.374687}
+      - {x: 1.0006574, y: -2.8120012}
+      - {x: 1.63, y: -2.7949998}
+      - {x: 1.63, y: 2.695}
+      - {x: 1.53, y: 2.8049998}

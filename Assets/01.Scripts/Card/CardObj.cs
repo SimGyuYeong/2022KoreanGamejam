@@ -8,17 +8,20 @@ using DG.Tweening;
 public class CardObj : MonoBehaviour
 {
     public Card card;
-    public Sprite sprite;
+    public SpriteRenderer spriteRenderer;
     public PRS originPRS;
 
     private void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>().sprite;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void Setup(Card card)
     {
         this.card = card;
+        spriteRenderer.sprite = UIManager.Instance.cardSprite[card.spriteNum];
+        if(GameManager.Instance.isGameStart == true)
+            spriteRenderer.sprite = UIManager.Instance.backCardSprite;
     }
 
     public void MoveTrm(PRS prs, bool isDotween, float time = 0)
@@ -35,5 +38,15 @@ public class CardObj : MonoBehaviour
             transform.rotation = prs.rot;
             transform.localScale = prs.scale;
         }
+    }
+
+    private void OnMouseOver()
+    {
+        CardManager.Instance.CardMouseOver(this);
+    }
+
+    private void OnMouseExit()
+    {
+        CardManager.Instance.CardMouseExit(this);
     }
 }

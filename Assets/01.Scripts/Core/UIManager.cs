@@ -6,5 +6,6 @@ using TMPro;
 
 public class UIManager : MonoSingleton<UIManager>
 {
-
+    public Sprite[] cardSprite;
+    public Sprite backCardSprite;
 }

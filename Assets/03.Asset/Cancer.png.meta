@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3c17462e661893b4b9cb06300415d81a
+guid: bc29f7ff1cf569f4faeebc886a3ce740
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: a642d099b98fb063_0
+      name: Cancer_0
       rect:
         serializedVersion: 2
         x: 89
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 926c078eeafe9dd4a9745045bc2934ff
-      internalID: -313745430
+      spriteID: c20611af96a12dd4c842f4763fe324c7
+      internalID: -1893988406
       vertices: []
       indices: 
       edges: []
@@ -147,7 +147,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      a642d099b98fb063_0: -313745430
+      Cancer_0: -1893988406
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

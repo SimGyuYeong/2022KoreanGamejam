@@ -17,5 +17,6 @@ public class Card
     public Star star;
     public string cardName;
     public string zodiac; //º°ÀÚ¸®
+    public int spriteNum;
 }
 

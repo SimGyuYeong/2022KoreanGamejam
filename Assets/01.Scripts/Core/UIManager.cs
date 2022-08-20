@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI player2ScoreText;
 
     public TextMeshProUGUI roundText;
+
+    public GameObject exitObj;
 
     private void Awake()
     {
@@ -47,4 +50,20 @@ public class UIManager : MonoBehaviour
     {
         roundText.text = GameManager.Instance.round.ToString();
     }
+
+    public void ShowExitUI()
+    {
+        exitObj.transform.DOScale(Vector3.one, 0.5f);
+    }
+
+    public void HiddenExitUI()
+    {
+        exitObj.transform.DOScale(Vector3.zero, 0.5f);
+    }
+
+    public void GameStop()
+    {
+        ChangeSceneManager.Instance.SceneChange("TitleScene");
+    }
+
 }

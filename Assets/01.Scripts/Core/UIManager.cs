@@ -115,5 +115,4 @@ public class UIManager : MonoBehaviour
         genalogyObj.Find("Background").GetComponent<Image>().DOFade(0, 0.2f);
         genalogyObj.Find("Genalogy").GetComponent<Image>().DOFade(0, 0.2f);
     }
-
 }

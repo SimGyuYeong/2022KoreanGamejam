@@ -234,7 +234,9 @@ public class CardManager : MonoBehaviour
 
     public void CardClick(CardObj card)
     {
-        if(card.spriteRenderer.sprite != UIManager.Instance.backCardSprite)
+        if(GameManager.Instance.isLoading == false)
+        {
+            if(card.spriteRenderer.sprite != UIManager.Instance.backCardSprite)
         {
             SoundManager.Instance.PlayEffectSound(clickSound);
             isCardDrag = true;
@@ -248,6 +250,8 @@ public class CardManager : MonoBehaviour
             }
             card.IsSelected = !card.IsSelected;
         }
+        }
+        
     }
 
     public void CardMouseUp()
@@ -272,6 +276,8 @@ public class CardManager : MonoBehaviour
                     if (zodiac == card.card.zodiac) zodiacCnt++;
                     if (weather == card.card.weather.weatherId) weatherCnt++;
                     if (star == card.card.star) starCnt++;
+
+                    if (card.card.zodiac == "cheonyeo") GameManager.Instance.TurnPlayer.cheonyeoCnt++;
                 }
 
                 if (nothingCnt == 0)
@@ -280,6 +286,8 @@ public class CardManager : MonoBehaviour
                     else if (weatherCnt == 5 && selectCardList.Count == 5) CardThrowSuccess(seasonScore);
                     else if (starCnt == 3 && selectCardList.Count == 3) CardThrowSuccess(threepleScore);
                     else if (starCnt == 2 && selectCardList.Count == 2) CardThrowSuccess(pareScore);
+
+                    if (GameManager.Instance.TurnPlayer.cheonyeoCnt == 4) GameManager.Instance.TurnPlayer.score -= 5;
                 }
             }
         }

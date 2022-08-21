@@ -11,6 +11,8 @@ public class Player
     public Transform cardListTrm;
     public List<CardObj> cards = new List<CardObj>();
 
+    public int cheonyeoCnt = 0;
+
     public bool _isFlip = false;
     public AudioClip flipSound;
 

@@ -2627,7 +2627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   round: 0
   turnMode: 0
-  startCardCnt: 10
+  startCardCnt: 23
   isFastMode: 1
   isLoading: 0
   isGameStart: 1
@@ -2637,6 +2637,7 @@ MonoBehaviour:
     roundScore: 0
     cardListTrm: {fileID: 2145557104}
     cards: []
+    cheonyeoCnt: 0
     _isFlip: 0
     flipSound: {fileID: 8300000, guid: 7d8558d16143bbf41ae12fd72ddd805c, type: 3}
   player2:
@@ -2645,6 +2646,7 @@ MonoBehaviour:
     roundScore: 0
     cardListTrm: {fileID: 479797547}
     cards: []
+    cheonyeoCnt: 0
     _isFlip: 0
     flipSound: {fileID: 8300000, guid: 7d8558d16143bbf41ae12fd72ddd805c, type: 3}
   canvas: {fileID: 1774109606}

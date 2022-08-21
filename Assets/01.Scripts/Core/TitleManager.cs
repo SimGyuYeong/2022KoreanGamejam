@@ -65,4 +65,9 @@ public class TitleManager : MonoBehaviour
         genalogyObj.Find("Background").GetComponent<Image>().DOFade(0, 0.2f);
         genalogyObj.Find("Genalogy").GetComponent<Image>().DOFade(0, 0.2f);
     }
+
+    public void ButtonClick()
+    {
+        SoundManager.Instance.PlayEffectSound(SoundManager.Instance.clickClip);
+    }
 }

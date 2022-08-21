@@ -1139,6 +1139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectSource: {fileID: 1185153686}
   bgmSource: {fileID: 1185153685}
+  zodiacEnterSource: {fileID: 8300000, guid: 906ddfc5abec7fd46b1e8a4462e78793, type: 3}
   bgmList:
   - {fileID: 8300000, guid: c9f9d80e04d9148448d92d9bf88a190d, type: 3}
   - {fileID: 8300000, guid: 9769da286ae015048bf627cb8b03cde7, type: 3}
@@ -1153,6 +1154,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8f472c9d4b321374dac84cd21ea005cd, type: 3}
   - {fileID: 8300000, guid: 3eecc7fdec8b73a4db4787b55fc1382b, type: 3}
   lobbySound: {fileID: 8300000, guid: ba55e1180b164224cbe91ac069cdfaa2, type: 3}
+  clickClip: {fileID: 8300000, guid: 7e255fb8fbd8f4b4fadf985430615f5e, type: 3}
 --- !u!4 &1185153688
 Transform:
   m_ObjectHideFlags: 0

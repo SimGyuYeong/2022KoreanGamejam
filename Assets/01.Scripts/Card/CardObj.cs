@@ -63,28 +63,31 @@ public class CardObj : PoolableMono
     {
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InOutQuad));
-        //seq.Join(spriteRenderer.DOColor(0, 0.5f));
         seq.AppendCallback(() => PoolManager.Instance.Push(this));
     }
 
     private void OnMouseOver()
     {
-        CardManager.Instance.CardMouseOver(this);
+        if(GameManager.Instance.isLoading == false)
+            CardManager.Instance.CardMouseOver(this);
     }
 
     private void OnMouseExit()
     {
-        CardManager.Instance.CardMouseExit(this);
+        if (GameManager.Instance.isLoading == false)
+            CardManager.Instance.CardMouseExit(this);
     }
 
     public void OnMouseDown()
     {
-        CardManager.Instance.CardClick(this);
+        if (GameManager.Instance.isLoading == false)
+            CardManager.Instance.CardClick(this);
     }
 
     public void OnMouseUp()
     {
-        CardManager.Instance.CardMouseUp();
+        if (GameManager.Instance.isLoading == false)
+            CardManager.Instance.CardMouseUp();
     }
 
     

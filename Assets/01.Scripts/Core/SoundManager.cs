@@ -9,9 +9,12 @@ public class SoundManager : MonoBehaviour
     public AudioSource effectSource;
     public AudioSource bgmSource;
 
+    public AudioClip zodiacEnterSource;
+
     public List<AudioClip> bgmList = new List<AudioClip>();
 
     public AudioClip lobbySound;
+    public AudioClip clickClip;
 
     private void Awake()
     {

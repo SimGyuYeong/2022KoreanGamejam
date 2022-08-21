@@ -43,6 +43,7 @@ public class RoundInform : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.DOScale(Vector3.one * 230, 0.1f);
+        SoundManager.Instance.PlayEffectSound(SoundManager.Instance.zodiacEnterSource);
     }
 
     public void OnPointerExit(PointerEventData eventData)

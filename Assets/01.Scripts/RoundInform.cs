@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.EventSystems;
 
-public class RoundInform : MonoBehaviour
+public class RoundInform : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public int roundNum;
     public bool isOpen = false;
@@ -36,5 +38,15 @@ public class RoundInform : MonoBehaviour
     public void ClickRound()
     {
         RoundManager.Instance.SelectRound(roundNum);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        transform.DOScale(Vector3.one * 230, 0.1f);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        transform.DOScale(Vector3.one * 200, 0.1f);
     }
 }

@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public GameObject exitObj;
 
     [SerializeField] private Transform genalogyObj;
+    [SerializeField] private Transform pieceObj;
     [SerializeField] private AudioClip winAudio;
 
 
@@ -87,6 +88,13 @@ public class UIManager : MonoBehaviour
         seq.AppendCallback(() => SoundManager.Instance.PlayEffectSound(winAudio));
         seq.Append(playerWInTrm.DOScale(Vector3.one, 0.1f));
         seq.AppendInterval(2f);
+        seq.Append(playerWInTrm.DOScale(Vector3.zero, 0f));
+        seq.Append(pieceObj.DOScale(Vector3.one, 0.2f));
+        seq.AppendCallback(() =>
+        {
+            pieceObj.GetComponentInChildren<TextMeshProUGUI>().text = (RoundManager.Instance.round - 1).ToString();
+        });
+        seq.AppendInterval(3f);
         seq.AppendCallback(() =>
         {
             SoundManager.Instance.PlayBgmSound(SoundManager.Instance.lobbySound);

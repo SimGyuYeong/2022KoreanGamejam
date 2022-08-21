@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
@@ -9,15 +11,22 @@ public class TutorialManager : MonoBehaviour
     public GameObject tutorial1btns;
 
     public Image CanvasImage;
-
+    public Image finish;
     private bool isBtnMode = true;
     public Sprite secondSprite;
     public Sprite thirdSprite;
     private int thirdcount = 0;
     public GameObject thridBtn;
-
     public Sprite fourthSprite;
-    // Start is called before the first frame update
+    public Image realcanvas;
+    // public GameObject backobj;
+    public Sprite fifthSprtie;
+    public Sprite back;
+    public Sprite sixSprite;
+    public GameObject text;
+    public GameObject images;
+    public Sprite seventhSprite;
+    // Start is called before the first frame upda;te
     void Start()
     {
         thridBtn.SetActive(false);
@@ -26,23 +35,49 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
+
     }
 
     public void ClickThird()
     {
-        Debug.Log("클릭... 된거이가?");
-        if (thirdcount >= 1)
+        Debug.Log(thirdcount);
+        /*  if (thirdcount >= 1)
+          {
+              CanvasImage.sprite = fourthSprite;
+          }*/
+
+
+        switch (thirdcount)
         {
-            CanvasImage.sprite = fourthSprite;
+            case 0:
+                CanvasImage.sprite = thirdSprite;
+                break;
+            case 1:
+                CanvasImage.sprite = fourthSprite;
+                realcanvas.gameObject.SetActive(true);
+                realcanvas.sprite = back;
+                break;
+            case 2:
+                CanvasImage.sprite = fifthSprtie;
+                realcanvas.sprite = back;
+
+                break;
+            case 3:
+                CanvasImage.sprite = sixSprite;
+                realcanvas.sprite = back;
+                break;
+            case 4:
+                CanvasImage.gameObject.SetActive(false);
+                images.SetActive(true);
+                text.SetActive(true);
+                finish.gameObject.SetActive(true);
+                break;
+
         }
-        else 
-        {
-            CanvasImage.sprite = thirdSprite;
-            thirdcount++;
-        }
-       
-        
+        thirdcount++;
+
+
+
     }
 
     public void clickgotoSecond()
@@ -55,7 +90,7 @@ public class TutorialManager : MonoBehaviour
 
     public void Skip()
     {
-        
+        ChangeSceneManager.Instance.SceneChange("TitleScene");
     }
-    
+
 }

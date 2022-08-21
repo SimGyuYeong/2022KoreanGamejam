@@ -3,14 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using System;
 
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] private Transform genalogyObj;
+    [SerializeField] private Transform exitUI;
 
     private void Start()
     {
         SoundManager.Instance.PlayBgmSound(SoundManager.Instance.lobbySound);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowExitUI();
+        }
+    }
+
+    public void ShowExitUI()
+    {
+        exitUI.DOScale(Vector3.one, 0.2f);
+    }
+
+    public void HideExitUI()
+    {
+        exitUI.DOScale(Vector3.zero, 0.2f);
+    }
+
+    public void GameExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
     }
 
     public void ClickRound()

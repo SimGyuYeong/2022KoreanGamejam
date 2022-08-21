@@ -165,11 +165,11 @@ public class GameManager : MonoBehaviour
         if(isGameStart == false)
             StartCoroutine(TurnPlayer.CardFlipCoroutine());
 
-        if(player1.score >= 30)
+        if(player1.score >= 12)
         {
             EndRound(1);
         }
-        else if(player2.score >= 30)
+        else if(player2.score >= 12)
         {
             EndRound(2);
         }

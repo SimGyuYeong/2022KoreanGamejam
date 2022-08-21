@@ -457,8 +457,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.7823, y: -5.1882}
-  m_SizeDelta: {x: 1910.6951, y: 1065.0125}
+  m_AnchoredPosition: {x: 7.7823, y: 1.1005}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &224181109
 MonoBehaviour:
@@ -2627,7 +2627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   round: 0
   turnMode: 0
-  startCardCnt: 23
+  startCardCnt: 10
   isFastMode: 1
   isLoading: 0
   isGameStart: 1

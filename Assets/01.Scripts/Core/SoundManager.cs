@@ -20,8 +20,6 @@ public class SoundManager : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        bgmSource.volume -= 0.5f;
     }
 
     public void PlayEffectSound(AudioClip clip)

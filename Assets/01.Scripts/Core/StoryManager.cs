@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class StoryManager : MonoBehaviour
 {
+    public bool isSkip = false;
+
     public Text text;
     private AudioSource audioSource;
     public string star;
@@ -147,9 +149,12 @@ public class StoryManager : MonoBehaviour
         audioSource.clip = clip;
         audioSource.Play();
 
-    }// Update is called once per frame"
-    void Update()
+    }
+
+    public void Skip()
     {
-        
+        isSkip = false;
+        audioSource.Stop();
+        ChangeSceneManager.Instance.SceneChange("CardScene");
     }
 }

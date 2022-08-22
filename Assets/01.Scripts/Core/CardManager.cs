@@ -277,7 +277,7 @@ public class CardManager : MonoBehaviour
                     if (weather == card.card.weather.weatherId) weatherCnt++;
                     if (star == card.card.star) starCnt++;
 
-                    if (card.card.zodiac == "cheonyeo") GameManager.Instance.TurnPlayer.cheonyeoCnt++;
+                    //if (card.card.zodiac == "cheonyeo") GameManager.Instance.TurnPlayer.cheonyeoCnt++;
                 }
 
                 if (nothingCnt == 0)
@@ -287,7 +287,7 @@ public class CardManager : MonoBehaviour
                     else if (starCnt == 3 && selectCardList.Count == 3) CardThrowSuccess(threepleScore);
                     else if (starCnt == 2 && selectCardList.Count == 2) CardThrowSuccess(pareScore);
 
-                    if (GameManager.Instance.TurnPlayer.cheonyeoCnt == 4) GameManager.Instance.TurnPlayer.score -= 5;
+                    //if (GameManager.Instance.TurnPlayer.cheonyeoCnt == 4) GameManager.Instance.TurnPlayer.score -= 5;
                 }
             }
         }
